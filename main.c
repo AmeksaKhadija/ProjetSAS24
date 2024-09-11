@@ -484,9 +484,10 @@ void Afficher_statistiques()
 //function pour rechercher des étudiants
 void Rechercher()
 {
-    printf("\n===================================== RECHERCHER PAR UN ETUDIANT =====================================n");
+    printf("\n===================================== RECHERCHER PAR UN ETUDIANT =====================================\n");
     int choix;
     int found = 0;
+    int choixDepartement;
     printf("entrer votre choix :\n");
     printf("1:Rechercher un étudiant par son nom .\n",nomRechercher);
     printf("2:Afficher la liste des étudiants inscrits dans un département spécifique .\n",departementRechercher);
@@ -501,7 +502,7 @@ void Rechercher()
             if (strcmp(etudiant1[i].nom, nomRechercher) == 0)
             {
                 found = 1;
-                printf("Les informations de l'�tudiant avec le nom : %s sont :\n", nomRechercher);
+                printf("Les informations de l'�tudiant avec le nom %s sont :\n", nomRechercher);
                 printf("Nom : %s\n", etudiant1[i].nom);
                 printf("Prenom : %s\n", etudiant1[i].prenom);
                 printf("Date de naissance : %d/%d/%d\n", etudiant1[i].dateNaissance.jour, etudiant1[i].dateNaissance.mois, etudiant1[i].dateNaissance.annee);
@@ -516,7 +517,36 @@ void Rechercher()
             printf("l'etudiant avec le nom  : %s n'existe pas.\n",nomRechercher);
         }
         break;
+    case 2:
+        printf("Entrez le numéro du département (0:Science, 1:Arts, 2:Engineering, 3:Law, 4:Medicine) : ");
+        scanf("%d", &choixDepartement);
 
+        if (choixDepartement < 0 || choixDepartement > 4)
+        {
+            printf("Erreur : Département non valide.\n");
+            return;
+        }
+
+        printf("Liste des étudiants dans le département : ");
+        getDepartementName((DepartementType)choixDepartement);
+        printf("\n");
+        for (int i = 0; i < compteur; i++)
+        {
+            if (etudiant1[i].departement == choixDepartement)
+            {
+                found = 1;
+                printf("ID: %d, Nom: %s, Prenom: %s, Note générale: %d\n", etudiant1[i].id, etudiant1[i].nom, etudiant1[i].prenom, etudiant1[i].noteGenerale);
+            }
+        }
+
+        if (!found)
+        {
+            printf("Aucun étudiant dans ce département.\n");
+        }
+        break;
+    default:
+        printf("Choix invalide.\n");
+        break;
     }
 
 };

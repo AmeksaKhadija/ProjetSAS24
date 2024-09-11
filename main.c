@@ -6,7 +6,7 @@ int main()
     menu1();
     return 0;
 }
-//struct pour les departement 
+
 typedef enum
 {
     SCIENCE,
@@ -16,7 +16,6 @@ typedef enum
     MEDICINE
 } DepartementType;
 
-//struct pour la date de naissance
 struct dateNaissance
 {
     int jour;
@@ -24,7 +23,6 @@ struct dateNaissance
     int annee;
 };
 
-//struct d'etudiant
 struct etudiant
 {
     int id;
@@ -43,10 +41,9 @@ int IDmodifier;
 int IDdel;
 int IDinfo;
 
-//function pour get afficher les depatrtement
 void getDepartementName(DepartementType departement)
 {
-    switch (departement)
+    switch(departement)
     {
     case SCIENCE:
         printf("Science");
@@ -69,7 +66,6 @@ void getDepartementName(DepartementType departement)
     }
 }
 
-//function de l'ajout d'un etudiant
 void Ajouter_etudiant()
 {
     printf("===============================AJOUTER UN ETUDIANT===============================\n");
@@ -87,7 +83,8 @@ void Ajouter_etudiant()
                 break;
             }
         }
-    } while (id_existe == 1);
+    }
+    while (id_existe == 1);
 
     etudiant1[compteur].id = nouvel_id;
 
@@ -127,35 +124,34 @@ void Ajouter_etudiant()
 
     compteur++;
 }
-// function pour choisir la modification ou la supprission d'un �tudiant.
+//function pour choisir la modification ou la supprission d'un �tudiant.
 void Modifier_supprimer_etudiant()
 {
     menu2();
 };
 
-//function de modification
 void Modifier_etudiant()
 {
     printf("\n=====================================MODIFICATION D'UN ETUDIANT=====================================");
-    int found = 0;
+    int found=0;
     printf("\n entrer ID de l'eleve que tu veux modifier :");
-    scanf("%d", &IDmodifier);
+    scanf("%d",&IDmodifier);
     int choix;
     int choixDepartement;
-    for (int i = 0; i < compteur; i++)
+    for(int i=0; i<compteur; i++)
     {
-        if (etudiant1[i].id == IDmodifier)
+        if(etudiant1[i].id == IDmodifier)
         {
             found = 1;
-            printf("\n modifier l'etudiant de ID : %d\n", IDmodifier);
+            printf("\n modifier l'etudiant de ID : %d\n",IDmodifier);
             printf("1.modifier le nom \n");
             printf("2.modifier le prenom \n");
             printf("3.modifier la date de naissance \n");
             printf("4.modifier la departement \n");
             printf("5.modifier la note g�n�rale \n");
             printf("entrer votre choix :");
-            scanf("%d", &choix);
-            switch (choix)
+            scanf("%d",&choix);
+            switch(choix)
             {
             case 1:
                 printf("entrer un nouveau nom :");
@@ -172,11 +168,11 @@ void Modifier_etudiant()
             case 3:
                 printf("entrer un nouveau date de naissance :\n");
                 printf("jour :");
-                scanf("%d", &etudiant1[i].dateNaissance.jour);
+                scanf("%d",&etudiant1[i].dateNaissance.jour);
                 printf("mois :");
-                scanf("%d", &etudiant1[i].dateNaissance.mois);
+                scanf("%d",&etudiant1[i].dateNaissance.mois);
                 printf("annee :");
-                scanf("%d", &etudiant1[i].dateNaissance.annee);
+                scanf("%d",&etudiant1[i].dateNaissance.annee);
                 break;
             case 4:
 
@@ -209,41 +205,39 @@ void Modifier_etudiant()
     }
 };
 
-//function pour supprimer un etudiant 
 void Supprimer_etudiant()
 {
     printf("\n=====================================SUPRIMER UN ETUDIANT=====================================");
-    int found = 0;
+    int found=0;
     printf("\n entrer ID de l'�tudiant qui tu veux suprimee :\n");
-    scanf("%d", &IDdel);
-    for (int i = 0; i < compteur; i++)
+    scanf("%d",&IDdel);
+    for(int i=0; i<compteur; i++)
     {
-        if (etudiant1[i].id == IDdel)
+        if (etudiant1[i].id==IDdel)
         {
             found = 1;
-            for (int N = i; N < compteur - 1; N++)
+            for (int N=i; N<compteur-1; N++)
             {
-                etudiant1[N] = etudiant1[N + 1];
+                etudiant1[N]=etudiant1[N+1];
             }
             compteur--;
-            printf(" l'�tudiant de ID=%d est supprime \n", IDdel);
+            printf(" l'�tudiant de ID=%d est supprime \n",IDdel);
             break;
         }
     }
-    if (!found)
+    if(!found)
     {
-        printf("l'�tudiant avec ID=%d n'existe pas.\n", IDdel);
+        printf("l'�tudiant avec ID=%d n'existe pas.\n",IDdel);
     }
 };
 
-//function pour afficher les info d'un etudiant
 void Afficher_info()
 {
     printf("\n=====================================AFFICHER LES INFORMATION D'UN ELEVE=====================================");
-    int found = 0;
+    int found=0;
     printf("\n entrer ID de l'�tudiant qui tu veux afficher leur informations :\n");
-    scanf("%d", &IDinfo);
-    for (int i = 0; i < compteur; i++)
+    scanf("%d",&IDinfo);
+    for(int i=0; i<compteur; i++)
     {
         if (etudiant1[i].id == IDinfo)
         {
@@ -260,16 +254,16 @@ void Afficher_info()
             printf("Note g�n�rale : %d\n", etudiant1[i].noteGenerale);
         }
     }
-    if (!found)
+    if(!found)
     {
-        printf("l'�tudiant avec ID=%d n'existe pas.\n", IDinfo);
+        printf("l'�tudiant avec ID=%d n'existe pas.\n",IDinfo);
     }
 };
 
-// function pour calculer la moyenne generale
+//function pour calculer la moyenne generale
 void Calculer_moyenne_generale()
 {
-    printf("\n===================================== CALCULER LA MOYENNE GÉNÉRALE =====================================\n");
+    printf("\n===================================== CALCULER LA MOYENNE GENERALE =====================================n");
 
     int totalNoteScience = 0, totalNoteArts = 0, totalNoteEngineering = 0, totalNoteLaw = 0, totalNoteMedicine = 0;
     int countScience = 0, countArts = 0, countEngineering = 0, countLaw = 0, countMedicine = 0;
@@ -335,6 +329,150 @@ void Calculer_moyenne_generale()
         printf("Pas d'étudiants dans l'université.\n");
 }
 
+//function pour afficher les statistique
+void Afficher_statistiques()
+{
+    int choix;
+
+    printf("\n===================================== STATISTIQUES =====================================\n");
+    printf("Choisissez une option :\n");
+    printf("1. Afficher le nombre total d'étudiants inscrits\n");
+    printf("2. Afficher le nombre d'étudiants dans chaque département\n");
+    printf("3. Afficher les étudiants ayant une moyenne générale supérieure à un certain seuil\n");
+    printf("4. Afficher les 3 étudiants ayant les meilleures notes\n");
+    printf("5. Afficher le nombre d'étudiants ayant réussi dans chaque département (note >= 10)\n");
+    printf("6. Quitter\n");
+
+    scanf("%d", &choix);
+
+    switch (choix)
+    {
+    case 1:
+        printf("\n Nombre total d'étudiants inscrits est : %d\n", compteur);
+        break;
+
+    case 2:
+    {
+        int countScience = 0, countArts = 0, countEngineering = 0, countLaw = 0, countMedicine = 0;
+
+        for (int i = 0; i < compteur; i++)
+        {
+            switch (etudiant1[i].departement)
+            {
+            case SCIENCE:
+                countScience++;
+                break;
+            case ARTS:
+                countArts++;
+                break;
+            case ENGINEERING:
+                countEngineering++;
+                break;
+            case LAW:
+                countLaw++;
+                break;
+            case MEDICINE:
+                countMedicine++;
+                break;
+            }
+        }
+
+        printf("\nNombre d'étudiants dans le département Science : %d\n", countScience);
+        printf("Nombre d'étudiants dans le département Arts : %d\n", countArts);
+        printf("Nombre d'étudiants dans le département Engineering : %d\n", countEngineering);
+        printf("Nombre d'étudiants dans le département Law : %d\n", countLaw);
+        printf("Nombre d'étudiants dans le département Medicine : %d\n", countMedicine);
+        break;
+    }
+
+    case 3:
+    {
+        float seuil;
+        printf("\n Entrez un seuil pour afficher les étudiants avec une moyenne supérieure : ");
+        scanf("%f", &seuil);
+
+        printf("\n Étudiants ayant une moyenne supérieure à %.2f sont :\n", seuil);
+        for (int i = 0; i < compteur; i++)
+        {
+            if (etudiant1[i].noteGenerale > seuil)
+            {
+                printf("ID: %d, Nom: %s, Prenom: %s, Note générale: %d\n",etudiant1[i].id, etudiant1[i].nom, etudiant1[i].prenom, etudiant1[i].noteGenerale);
+            }
+        }
+        break;
+    }
+
+    case 4:
+        printf("\n Les 3 étudiants avec les meilleures notes sont :\n");
+
+        for (int i = 0; i < compteur - 1; i++)
+        {
+            for (int j = i + 1; j < compteur; j++)
+            {
+                if (etudiant1[i].noteGenerale < etudiant1[j].noteGenerale)
+                {
+                    struct etudiant temp = etudiant1[i];
+                    etudiant1[i] = etudiant1[j];
+                    etudiant1[j] = temp;
+                }
+            }
+        }
+
+        for (int i = 0; i < 3 && i < compteur; i++)
+        {
+            printf("ID: %d, Nom: %s, Prenom: %s, Note générale: %d\n",etudiant1[i].id, etudiant1[i].nom, etudiant1[i].prenom, etudiant1[i].noteGenerale);
+        }
+        break;
+
+    case 5:
+    {
+        int countSuccessScience = 0, countSuccessArts = 0, countSuccessEngineering = 0, countSuccessLaw = 0, countSuccessMedicine = 0;
+
+        for (int i = 0; i < compteur; i++)
+        {
+            if (etudiant1[i].noteGenerale >= 10)
+            {
+                switch (etudiant1[i].departement)
+                {
+                case SCIENCE:
+                    countSuccessScience++;
+                    break;
+                case ARTS:
+                    countSuccessArts++;
+                    break;
+                case ENGINEERING:
+                    countSuccessEngineering++;
+                    break;
+                case LAW:
+                    countSuccessLaw++;
+                    break;
+                case MEDICINE:
+                    countSuccessMedicine++;
+                    break;
+                }
+            }
+        }
+
+        printf("\nNombre d'étudiants ayant réussi (note >= 10) dans le département Science : %d\n", countSuccessScience);
+        printf("Nombre d'étudiants ayant réussi (note >= 10) dans le département Arts : %d\n", countSuccessArts);
+        printf("Nombre d'étudiants ayant réussi (note >= 10) dans le département Engineering : %d\n", countSuccessEngineering);
+        printf("Nombre d'étudiants ayant réussi (note >= 10) dans le département Law : %d\n", countSuccessLaw);
+        printf("Nombre d'étudiants ayant réussi (note >= 10) dans le département Medicine : %d\n", countSuccessMedicine);
+        break;
+    }
+
+    case 6:
+        printf("Quitter les statistiques.\n");
+        break;
+
+    default:
+        printf("Option invalide. Veuillez choisir un nombre entre 1 et 6.\n");
+        break;
+    }
+}
+
+
+
 int menu1()
 {
     int selection;
@@ -367,8 +505,13 @@ int menu1()
         case 4:
             Calculer_moyenne_generale();
             break;
+        case 5:
+            Afficher_statistiques();
+            break;
+
         }
-    } while (selection != 8);
+    }
+    while (selection != 8);
 
     return 0;
 }
@@ -393,6 +536,9 @@ int menu2()
             Supprimer_etudiant();
             break;
         }
-    } while (selection != 3);
+    }
+    while (selection != 3);
     return 0;
 }
+
+

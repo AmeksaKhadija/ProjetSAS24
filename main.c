@@ -6,7 +6,7 @@ int main()
     menu1();
     return 0;
 }
-//enum pour les departement 
+//enum pour les departement
 typedef enum
 {
     SCIENCE,
@@ -15,8 +15,8 @@ typedef enum
     LAW,
     MEDICINE
 } DepartementType;
- 
-//struct pour la date de naissance 
+
+//struct pour la date de naissance
 struct dateNaissance
 {
     int jour;
@@ -42,6 +42,9 @@ int id_existe = 0;
 int IDmodifier;
 int IDdel;
 int IDinfo;
+char nomRechercher[100];
+char departementRechercher[100];
+
 
 //function pour afficher les departement existe
 void getDepartementName(DepartementType departement)
@@ -478,6 +481,45 @@ void Afficher_statistiques()
     }
 }
 
+//function pour rechercher des étudiants
+void Rechercher()
+{
+    printf("\n===================================== RECHERCHER PAR UN ETUDIANT =====================================n");
+    int choix;
+    int found = 0;
+    printf("entrer votre choix :\n");
+    printf("1:Rechercher un étudiant par son nom .\n",nomRechercher);
+    printf("2:Afficher la liste des étudiants inscrits dans un département spécifique .\n",departementRechercher);
+    scanf("%d",&choix);
+    switch(choix)
+    {
+    case 1:
+        printf("Entrer le nom de l'étudiant qui tu veux rechercher :");
+        scanf("%s",&nomRechercher);
+        for(int i=0; i<compteur; i++)
+        {
+            if (strcmp(etudiant1[i].nom, nomRechercher) == 0)
+            {
+                found = 1;
+                printf("Les informations de l'�tudiant avec le nom : %s sont :\n", nomRechercher);
+                printf("Nom : %s\n", etudiant1[i].nom);
+                printf("Prenom : %s\n", etudiant1[i].prenom);
+                printf("Date de naissance : %d/%d/%d\n", etudiant1[i].dateNaissance.jour, etudiant1[i].dateNaissance.mois, etudiant1[i].dateNaissance.annee);
+                printf("Departement : ");
+                getDepartementName(etudiant1[i].departement);
+                printf("\n");
+                printf("Note generale : %d\n", etudiant1[i].noteGenerale);
+            }
+        }
+        if(!found)
+        {
+            printf("l'etudiant avec le nom  : %s n'existe pas.\n",nomRechercher);
+        }
+        break;
+
+    }
+
+};
 
 //menu principale
 int menu1()
@@ -514,6 +556,9 @@ int menu1()
             break;
         case 5:
             Afficher_statistiques();
+            break;
+        case 6:
+            Rechercher();
             break;
 
         }

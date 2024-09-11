@@ -555,32 +555,70 @@ void Rechercher()
 void Triage()
 {
     printf("\n===================================== TRIER UN ETUDIANT =====================================\n");
-    int choix;
+    int choix,ordre;
     printf("Entrer votre choix :\n");
     printf("1.Tri alphabétique des étudiants en fonction de leur nom (de A à Z ou de Z à A)\n");
     printf("2.Tri des étudiants par moyenne générale, du plus élevé au plus faible ou inversement\n");
-    printf("3.Tri des étudiants selon leur statut de réussite (ceux ayant une moyenne supérieure ou égale à 10/20)");
+    printf("3.Tri des étudiants selon leur statut de réussite (ceux ayant une moyenne supérieure ou égale à 10/20)\n");
     scanf("%d",&choix);
 
     switch(choix)
     {
     case 1:
-        for(int i=0; i<compteur; i++)
+        printf("Entrer l'ordre de tri : 1 pour A à Z, 2 pour Z à A : ");
+        scanf("%d", &ordre);
+        for (int i = 0; i < compteur - 1; i++)
         {
-            for(int j=i+1; j<compteur; j++)
+            for (int j = i + 1; j < compteur; j++)
             {
-                if (strcasecmp(etudiant1[i].nom, etudiant1[j].nom) >0)
+                if ((ordre == 1 && strcasecmp(etudiant1[i].nom, etudiant1[j].nom) > 0) || (ordre == 2 && strcasecmp(etudiant1[i].nom, etudiant1[j].nom) < 0))
                 {
-                    temporaire=etudiant1[j];
-                    etudiant1[j]=etudiant1[i];
-                    etudiant1[i]=temporaire;
+                    temporaire = etudiant1[i];
+                    etudiant1[i] = etudiant1[j];
+                    etudiant1[j] = temporaire;
                 }
             }
         }
-        for(int i=0; i<compteur; i++)
+        printf("\nListe des étudiants triés par nom :\n");
+        for (int i = 0; i < compteur; i++)
         {
-                printf("ID: %d, Nom: %s\n", etudiant1[i].id, etudiant1[i].nom);
+            printf("ID: %d, Nom: %s, Prenom: %s, Note générale: %d\n", etudiant1[i].id, etudiant1[i].nom, etudiant1[i].prenom, etudiant1[i].noteGenerale);
         }
+        break;
+    case 2:
+        printf("Entrer l'ordre de tri : 1 pour du plus élevé au plus faible, 2 pour l'inverse : ");
+        scanf("%d", &ordre);
+        for (int i = 0; i < compteur - 1; i++)
+        {
+            for (int j = i + 1; j < compteur; j++)
+            {
+                if ((ordre == 1 && etudiant1[i].noteGenerale < etudiant1[j].noteGenerale) || (ordre == 2 && etudiant1[i].noteGenerale > etudiant1[j].noteGenerale))
+                {
+                    temporaire = etudiant1[i];
+                    etudiant1[i] = etudiant1[j];
+                    etudiant1[j] = temporaire;
+                }
+            }
+        }
+        printf("\nListe des étudiants triés par note générale :\n");
+        for (int i = 0; i < compteur; i++)
+        {
+            printf("ID: %d, Nom: %s, Prenom: %s, Note générale: %d\n", etudiant1[i].id, etudiant1[i].nom, etudiant1[i].prenom, etudiant1[i].noteGenerale);
+        }
+        break;
+    case 3:
+        printf("\nListe des étudiants ayant une moyenne supérieure ou égale à 10/20 :\n");
+        for (int i = 0; i < compteur; i++)
+        {
+            if (etudiant1[i].noteGenerale >= 10)
+            {
+                printf("ID: %d, Nom: %s, Prenom: %s, Note générale: %d\n", etudiant1[i].id, etudiant1[i].nom, etudiant1[i].prenom, etudiant1[i].noteGenerale);
+            }
+        }
+        break;
+
+    default:
+        printf("Choix invalide.\n");
         break;
     }
 };
@@ -659,5 +697,3 @@ int menu2()
     while (selection != 3);
     return 0;
 }
-
-

@@ -44,7 +44,7 @@ int IDdel;
 int IDinfo;
 char nomRechercher[100];
 char departementRechercher[100];
-
+struct etudiant temporaire;
 
 //function pour afficher les departement existe
 void getDepartementName(DepartementType departement)
@@ -551,6 +551,41 @@ void Rechercher()
 
 };
 
+//function pour que utilisateur choisi la façon avec laquelle doit fair le triage
+void Triage()
+{
+    printf("\n===================================== TRIER UN ETUDIANT =====================================\n");
+    int choix;
+    printf("Entrer votre choix :\n");
+    printf("1.Tri alphabétique des étudiants en fonction de leur nom (de A à Z ou de Z à A)\n");
+    printf("2.Tri des étudiants par moyenne générale, du plus élevé au plus faible ou inversement\n");
+    printf("3.Tri des étudiants selon leur statut de réussite (ceux ayant une moyenne supérieure ou égale à 10/20)");
+    scanf("%d",&choix);
+
+    switch(choix)
+    {
+    case 1:
+        for(int i=0; i<compteur; i++)
+        {
+            for(int j=i+1; j<compteur; j++)
+            {
+                if (strcasecmp(etudiant1[i].nom, etudiant1[j].nom) >0)
+                {
+                    temporaire=etudiant1[j];
+                    etudiant1[j]=etudiant1[i];
+                    etudiant1[i]=temporaire;
+                }
+            }
+        }
+        for(int i=0; i<compteur; i++)
+        {
+                printf("ID: %d, Nom: %s\n", etudiant1[i].id, etudiant1[i].nom);
+        }
+        break;
+    }
+};
+
+
 //menu principale
 int menu1()
 {
@@ -590,7 +625,9 @@ int menu1()
         case 6:
             Rechercher();
             break;
-
+        case 7:
+            Triage();
+            break;
         }
     }
     while (selection != 8);

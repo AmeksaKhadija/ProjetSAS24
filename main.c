@@ -6,7 +6,7 @@ int main()
     menu1();
     return 0;
 }
-
+//enum pour les departement 
 typedef enum
 {
     SCIENCE,
@@ -15,7 +15,8 @@ typedef enum
     LAW,
     MEDICINE
 } DepartementType;
-
+ 
+//struct pour la date de naissance 
 struct dateNaissance
 {
     int jour;
@@ -23,6 +24,7 @@ struct dateNaissance
     int annee;
 };
 
+//struct d'etudiant
 struct etudiant
 {
     int id;
@@ -41,6 +43,7 @@ int IDmodifier;
 int IDdel;
 int IDinfo;
 
+//function pour afficher les departement existe
 void getDepartementName(DepartementType departement)
 {
     switch(departement)
@@ -66,6 +69,7 @@ void getDepartementName(DepartementType departement)
     }
 }
 
+// function pour ajouter un étudiant
 void Ajouter_etudiant()
 {
     printf("===============================AJOUTER UN ETUDIANT===============================\n");
@@ -130,6 +134,7 @@ void Modifier_supprimer_etudiant()
     menu2();
 };
 
+// function pour modifier les info d'un étudiant
 void Modifier_etudiant()
 {
     printf("\n=====================================MODIFICATION D'UN ETUDIANT=====================================");
@@ -205,6 +210,7 @@ void Modifier_etudiant()
     }
 };
 
+//function pour supprimer un étudiant
 void Supprimer_etudiant()
 {
     printf("\n=====================================SUPRIMER UN ETUDIANT=====================================");
@@ -231,6 +237,7 @@ void Supprimer_etudiant()
     }
 };
 
+//function pour afficher les info d'un etudiant
 void Afficher_info()
 {
     printf("\n=====================================AFFICHER LES INFORMATION D'UN ELEVE=====================================");
@@ -472,7 +479,7 @@ void Afficher_statistiques()
 }
 
 
-
+//menu principale
 int menu1()
 {
     int selection;

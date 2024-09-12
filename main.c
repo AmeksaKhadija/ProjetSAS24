@@ -560,6 +560,7 @@ void Triage()
     printf("1.Tri alphabetique des etudiants en fonction de leur nom (de A a Z ou de Z a A)\n");
     printf("2.Tri des etudiants par moyenne generale, du plus eleve au plus faible ou inversement\n");
     printf("3.Tri des etudiants selon leur statut de reussite (ceux ayant une moyenne superieure ou egale a 10/20)\n");
+    printf("4. Quitter\n");
     scanf("%d",&choix);
 
     switch(choix)
@@ -615,6 +616,9 @@ void Triage()
                 printf("ID: %d, Nom: %s, Prenom: %s, Note generale: %d\n", etudiant1[i].id, etudiant1[i].nom, etudiant1[i].prenom, etudiant1[i].noteGenerale);
             }
         }
+        break;
+    case 4:
+        printf("Quitter.\n");
         break;
 
     default:

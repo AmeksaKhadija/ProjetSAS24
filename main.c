@@ -76,9 +76,10 @@ void getDepartementName(DepartementType departement)
 void Ajouter_etudiant()
 {
     printf("===============================AJOUTER UN ETUDIANT===============================\n");
+
     do
     {
-        printf("\nEntrer un identifiant unique :");
+        printf("\nEntrer un identifiant unique : ");
         scanf("%d", &nouvel_id);
         id_existe = 0;
         for (int i = 0; i < compteur; i++)
@@ -86,50 +87,91 @@ void Ajouter_etudiant()
             if (etudiant1[i].id == nouvel_id)
             {
                 id_existe = 1;
-                printf("Erreur : Cet identifiant existe deje. Veuillez entrer un identifiant unique.\n");
+                printf("Erreur : Cet identifiant existe dejà. Veuillez entrer un identifiant unique.\n");
                 break;
             }
         }
     }
-    while (id_existe == 1);
+    while (id_existe == 1 || nouvel_id <= 0);
 
     etudiant1[compteur].id = nouvel_id;
 
-    printf("Entrer le nom de l'etudiant: ");
-    getchar(); // To consume the newline character left by scanf
-    gets(etudiant1[compteur].nom);
+    do
+    {
+        printf("Entrer le nom de l'etudiant: ");
+        getchar(); 
+        fgets(etudiant1[compteur].nom, sizeof(etudiant1[compteur].nom), stdin);
+        if (etudiant1[compteur].nom[0] == '\n')  
+        {
+            printf("Erreur : Le nom ne peut pas etre vide.\n");
+        }
+    } while (etudiant1[compteur].nom[0] == '\n');  
+    do
+    {
+        printf("Entrer le prenom de l'etudiant: ");
+        fgets(etudiant1[compteur].prenom, sizeof(etudiant1[compteur].prenom), stdin);
+        if (etudiant1[compteur].prenom[0] == '\n')  
+        {
+            printf("Erreur : Le prenom ne peut pas etre vide.\n");
+        }
+    } while (etudiant1[compteur].prenom[0] == '\n');
 
-    printf("Entrer le prenom de l'etudiant: ");
-    gets(etudiant1[compteur].prenom);
+    do
+    {
+        printf("Entrer la date de naissance de l'etudiant :\n");
+        printf("Jour: ");
+        scanf("%d", &etudiant1[compteur].dateNaissance.jour);
+        if (etudiant1[compteur].dateNaissance.jour < 1 || etudiant1[compteur].dateNaissance.jour > 31)
+        {
+            printf("Erreur : Le jour doit etre entre 1 et 31.\n");
+        }
+    } while (etudiant1[compteur].dateNaissance.jour < 1 || etudiant1[compteur].dateNaissance.jour > 31);
 
-    printf("Entrer la date de naissance de l'etudiant :\n");
-    printf("Jour: ");
-    scanf("%d", &etudiant1[compteur].dateNaissance.jour);
-    printf("Mois: ");
-    scanf("%d", &etudiant1[compteur].dateNaissance.mois);
-    printf("Annee: ");
-    scanf("%d", &etudiant1[compteur].dateNaissance.annee);
+    do
+    {
+        printf("Mois: ");
+        scanf("%d", &etudiant1[compteur].dateNaissance.mois);
+        if (etudiant1[compteur].dateNaissance.mois < 1 || etudiant1[compteur].dateNaissance.mois > 12)
+        {
+            printf("Erreur : Le mois doit etre entre 1 et 12.\n");
+        }
+    } while (etudiant1[compteur].dateNaissance.mois < 1 || etudiant1[compteur].dateNaissance.mois > 12);
 
-    // Choose department
+    do
+    {
+        printf("Annee: ");
+        scanf("%d", &etudiant1[compteur].dateNaissance.annee);
+        if (etudiant1[compteur].dateNaissance.annee < 1900 || etudiant1[compteur].dateNaissance.annee > 2024)
+        {
+            printf("Erreur : L'annee doit etre entre 1900 et 2024.\n");
+        }
+    } while (etudiant1[compteur].dateNaissance.annee < 1900 || etudiant1[compteur].dateNaissance.annee > 2024);
+
     int choixDepartement;
-    printf("Entrer la departement de l'etudiant (0:Science, 1:Arts, 2:Engineering, 3:Law, 4:Medicine): ");
-    scanf("%d", &choixDepartement);
-
-    // Validate department choice
-    if (choixDepartement >= 0 && choixDepartement <= 4)
+    do
     {
-        etudiant1[compteur].departement = (DepartementType)choixDepartement;
-    }
-    else
-    {
-        printf("Erreur : Departement non valide.\n");
-        return;
-    }
+        printf("Entrer la departement de l'etudiant (0:Science, 1:Arts, 2:Engineering, 3:Law, 4:Medicine): ");
+        scanf("%d", &choixDepartement);
+        if (choixDepartement < 0 || choixDepartement > 4)
+        {
+            printf("Erreur : Departement non valide. Veuillez choisir entre 0 et 4.\n");
+        }
+    } while (choixDepartement < 0 || choixDepartement > 4);
 
-    printf("Entrer la note generale de l'etudiant: ");
-    scanf("%d", &etudiant1[compteur].noteGenerale);
+    etudiant1[compteur].departement = (DepartementType)choixDepartement;
+
+    do
+    {
+        printf("Entrer la note generale de l'etudiant: ");
+        scanf("%d", &etudiant1[compteur].noteGenerale);
+        if (etudiant1[compteur].noteGenerale < 0 || etudiant1[compteur].noteGenerale > 20)
+        {
+            printf("Erreur : La note generale doit etre entre 0 et 20.\n");
+        }
+    } while (etudiant1[compteur].noteGenerale < 0 || etudiant1[compteur].noteGenerale > 20);
 
     compteur++;
+    printf("etudiant ajoute avec succès !\n");
 }
 //function pour choisir la modification ou la supprission d'un etudiant.
 void Modifier_supprimer_etudiant()
